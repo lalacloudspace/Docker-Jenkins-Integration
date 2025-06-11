@@ -1,11 +1,19 @@
-FROM ubuntu
-LABEL description="I am building this image for Apache containers"
+FROM amazonlinux:2
+
+LABEL description="I am building this image for a web app"
+
 LABEL maintainer="Lala Aicha"
-RUN apt -y update
-RUN apt -y install apache2
+
+RUN yum -y update
+
+RUN yum install -y httpd 
+
 COPY index.html /var/www/html/
+
 EXPOSE 80
-ENTRYPOINT ["/usr/sbin/apache2ctl"]
+
+ENTRYPOINT [ "/usr/sbin/httpd" ]
+
 CMD ["-D", "FOREGROUND"]
 
 
